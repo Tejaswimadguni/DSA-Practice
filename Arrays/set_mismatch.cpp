@@ -1,0 +1,28 @@
+// Problem: Set Mismatch
+// Link: https://leetcode.com/problems/set-mismatch/
+// Difficulty: Easy
+// Language: C++
+
+class Solution {
+public:
+    vector<int> findErrorNums(vector<int>& nums) {
+        int duplicate = -1;
+        int missing = -1;
+        int n = nums.size();
+        for(int i = 0; i < n; i++){
+            int index = abs(nums[i]) - 1;
+            if(nums[index] < 0){
+                duplicate = abs(nums[i]);
+            }
+            else{
+                nums[index] = -nums[index];
+            }
+        }
+        for(int i = 0; i < n; i++){
+            if(nums[i] > 0){
+                missing = i + 1;
+            }
+        }
+        return {duplicate, missing};
+    }
+};
